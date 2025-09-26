@@ -215,7 +215,7 @@ async def _call_ollama(model: str, prompt_text: str, image_bytes: bytes) -> str:
         "stream": False,
     }
 
-    async with httpx.AsyncClient(timeout=httpx.Timeout(120.0)) as client:
+    async with httpx.AsyncClient(timeout=httpx.Timeout(480.0)) as client:
         response = await client.post(OLLAMA_GENERATE_URL, json=payload)
         response.raise_for_status()
     data = response.json()
