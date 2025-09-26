@@ -4,8 +4,8 @@ Imagecap is a playground for generating image captions by combining a Vue-based 
 
 ## Requirements
 
-- Python 3.10 or later
-- Node.js 20 or later (ships with npm)
+- [Python](https://www.python.org/) 3.10 or later
+- [Node.js](https://nodejs.org/) 20 or later (ships with npm)
 - [Ollama](https://ollama.com/) running locally with a vision-capable model pulled (for example `ollama pull llava`)
 
 > The backend talks to Ollama at `http://localhost:11434` by default. If your instance runs elsewhere, set `OLLAMA_URL` or `OLLAMA_HOST` before starting (details below).
@@ -34,6 +34,9 @@ Every successful generation is appended to `backend/caption_log.csv` (spreadshee
 
 Use the prompt panel tabs to switch between saved prompts, adding a new reusable entry, or the one-off "Free prompt mode" for ad-hoc experimentation.
 
+- Saved prompt library lives in `backend/prompts.md`. Each entry is stored as a Markdown section (`## Label`, followed by `id: …` and the prompt body) so it can be versioned with git alongside the rest of the repo.
+- The backend loads that file on startup; any prompt you save through the UI rewrites it in-place with a new UUID for the prompt. Edit the file manually if you want to tweak wording, remove entries, or reorder sections—just keep the `id:` lines intact so existing selections in the UI continue to work.
+  
 ## Batch mode
 
 Switch to the Batch mode panel in the app to drop in multiple images at once. The UI will process them sequentially with the current prompt/model and shows per-image progress, captions, and any errors.
@@ -77,5 +80,3 @@ Stop each process with `Ctrl+C`.
 - **Missing Python or Node:** Install the required versions from <https://www.python.org/downloads/> and <https://nodejs.org/en/download>.
 - **Ollama connection errors:** Ensure `ollama serve` (or the desktop app) is running and that the chosen model is pulled.
 - **Port already in use:** Stop the conflicting program or edit the ports in `start.py` before running.
-
-Happy captioning!
